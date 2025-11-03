@@ -1,9 +1,9 @@
 
+name: tema5
 services:
   php:
     image: php:8.4-fpm
     build: ./php
-    container_name: dk_php
     volumes:
       - ./src:/var/www/html
       - ./php/conf.d/99-xdebug.ini:/usr/local/etc/php/conf.d/99-xdebug.ini
@@ -22,7 +22,6 @@ services:
 
   nginx:
     image: nginx:latest
-    container_name: dk_nginx
     ports:
       - "8080:80"
     volumes:
@@ -33,7 +32,6 @@ services:
 
   mysql:
     image: mysql:8
-    container_name: dk_mysql
     environment:
       MYSQL_ROOT_PASSWORD: administrador
       MYSQL_USER: alumno
