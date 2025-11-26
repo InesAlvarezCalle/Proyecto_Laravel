@@ -38,8 +38,8 @@ services:
       MYSQL_PASSWORD: alumno
       MYSQL_DATABASE: test
     volumes:
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/tmp:/tmp
+      - aeropuertos:/var/lib/mysql
+      # - ./mysql/tmp:/tmp
     ports:
       - "3306:3306"
     networks:
@@ -48,3 +48,6 @@ services:
 networks:
   default:
     driver: bridge
+
+volumes:
+  aeropuertos:

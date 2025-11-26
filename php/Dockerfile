@@ -21,8 +21,13 @@ RUN docker-php-ext-install pdo pdo_mysql xml ctype zip
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Instalamos Xdebug
-RUN php -n /usr/local/bin/pecl install xdebug \
-    && docker-php-ext-enable xdebug
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends $PHPIZE_DEPS; \
+    pecl install xdebug; \
+    docker-php-ext-enable xdebug; \
+    apt-get purge -y --auto-remove $PHPIZE_DEPS; \
+    rm -rf /var/lib/apt/lists/*
 
 # Opcional: Definir directorio de trabajo
 WORKDIR /var/www/html
